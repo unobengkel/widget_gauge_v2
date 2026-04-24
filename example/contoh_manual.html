@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Manual - Widget Knob</title>
+
+    <!-- [WAJIB] Library Canvas Gauges -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-gauges@2.1.7/gauge.min.js"></script>
+
+    <!-- [WAJIB] CSS Widget Knob -->
+    <link rel="stylesheet" href="../asset/widget_knob/knob.css">
+
+    <!-- [WAJIB] JS Widget Knob -->
+    <script src="../asset/widget_knob/knob.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #1a202c;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 { margin-bottom: 20px; }
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 450px;
+        }
+        .controls {
+            width: 100%;
+            background: #2d3748;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .controls label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: #3b82f6;
+        }
+        .value-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        .value-info span:last-child {
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>Contoh Manual - Kendali Slider</h2>
+
+    <div class="demo-container">
+        <!-- Container widget knob -->
+        <div id="my-gauge"></div>
+
+        <div class="controls">
+            <label for="gauge-slider">Kendali Nilai:</label>
+            <input type="range" id="gauge-slider" min="0" max="100" value="0">
+            <div class="value-info">
+                <span>Min: 0</span>
+                <span id="display-val">0</span>
+                <span>Maks: 100</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inisialisasi widget
+            const gauge = new KnobGauge('my-gauge', {
+                minValue: 0,
+                maxValue: 100,
+                value: 0
+            });
+
+            const slider = document.getElementById('gauge-slider');
+            const displayVal = document.getElementById('display-val');
+
+            // Event slider -> update gauge
+            slider.addEventListener('input', (e) => {
+                const val = Number(e.target.value);
+                gauge.setValue(val, true); // silent=true agar tidak trigger event change
+                displayVal.textContent = val;
+            });
+
+            // Sinkron display awal
+            displayVal.textContent = gauge.getValue();
+        });
+    </script>
+</body>
+</html>

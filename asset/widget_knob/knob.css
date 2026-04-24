@@ -1,0 +1,81 @@
+/* ============================================================
+   knob.css - Widget Knob Gauge Styles
+   Copy file ini ke project kamu untuk styling widget knob.
+   ============================================================ */
+
+/* Container utama untuk widget knob */
+.knob-gauge-wrapper {
+    width: 350px;
+    height: 350px;
+    position: relative;
+    background: #2d3748;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Tampilan nilai numerik di tengah gauge */
+.knob-value-display {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    color: #ffffff;
+    font-family: sans-serif;
+    user-select: none;
+}
+
+/* Label satuan di samping nilai */
+.knob-value-unit {
+    font-size: 1.2rem;
+    font-weight: normal;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+/* Canvas tempat gauge digambar */
+.knob-canvas {
+    display: block;
+}
+
+/* Variasi tema terang (light theme) */
+.knob-gauge-wrapper.knob-light {
+    background: #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+.knob-gauge-wrapper.knob-light .knob-value-display {
+    color: #1a202c;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Variasi ukuran kecil */
+.knob-gauge-wrapper.knob-small {
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+}
+
+.knob-gauge-wrapper.knob-small .knob-value-display {
+    font-size: 1.5rem;
+    bottom: 8%;
+}
+
+/* Variasi ukuran besar */
+.knob-gauge-wrapper.knob-large {
+    width: 450px;
+    height: 450px;
+    padding: 25px;
+}
+
+.knob-gauge-wrapper.knob-large .knob-value-display {
+    font-size: 3.5rem;
+}

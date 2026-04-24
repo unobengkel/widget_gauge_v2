@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget Knob Gauge v2</title>
+
+    <!-- Library Canvas Gauges -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-gauges@2.1.7/gauge.min.js"></script>
+
+    <!-- Widget Knob -->
+    <link rel="stylesheet" href="asset/widget_knob/knob.css">
+    <script src="asset/widget_knob/knob.js"></script>
+
+    <!-- Web Styles -->
+    <link rel="stylesheet" href="asset/web/main.css">
+
+    <style>
+        /* Tambahan khusus halaman utama */
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .nav-links a {
+            padding: 10px 20px;
+            background: #2d3748;
+            color: #e2e8f0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .nav-links a.highlight {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+        }
+        .feature-card {
+            background: #2d3748;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .feature-card h3 {
+            font-size: 1rem;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+        }
+        .feature-card p {
+            font-size: 0.85rem;
+            color: #a0aec0;
+        }
+        footer {
+            margin-top: 40px;
+            color: #4a5568;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🎛 Widget Knob Gauge</h1>
+        <p>
+            Widget reusable berbasis Canvas Gauges. Cukup copy 2 file 
+            (<code>knob.js</code> & <code>knob.css</code>) 
+            untuk digunakan di project manapun.
+        </p>
+    </div>
+
+    <div class="nav-links">
+        <a href="tutorial.html">📖 Tutorial</a>
+        <a href="example/contoh_dasar.html">🔰 Contoh Dasar</a>
+        <a href="example/contoh_manual.html">🎚 Contoh Manual</a>
+        <a href="example/contoh_otomatis.html">🤖 Contoh Otomatis</a>
+        <a href="https://github.com/username/widget_gauge_v2" class="highlight" target="_blank">⭐ GitHub</a>
+    </div>
+
+    <div class="demo-container">
+        <div id="main-gauge"></div>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">📦</div>
+            <h3>Reusable</h3>
+            <p>Copy 2 file, siap pakai di project mana saja</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🎨</div>
+            <h3>Kustomisasi</h3>
+            <p>Warna, ukuran, animasi, semua bisa diatur</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>Ringan</h3>
+            <p>Berbasis Canvas Gauges, performa tinggi</p>
+        </div>
+    </div>
+
+    <footer>
+        Widget Knob Gauge v2 &copy; 2026
+    </footer>
+
+    <!-- Web JS untuk demo di halaman utama -->
+    <script src="asset/web/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Demo gauge di landing page
+            const demo = initDemoGauge('main-gauge', {
+                width: 280,
+                height: 280,
+                animationDuration: 600
+            });
+
+            // Jalankan simulasi otomatis untuk demo
+            demo.startSimulation();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Dasar - Widget Knob</title>
+
+    <!-- [WAJIB] Library Canvas Gauges (dari CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-gauges@2.1.7/gauge.min.js"></script>
+
+    <!-- [WAJIB] CSS Widget Knob - Copy dari project -->
+    <link rel="stylesheet" href="../asset/widget_knob/knob.css">
+
+    <!-- [WAJIB] JS Widget Knob - Copy dari project -->
+    <script src="../asset/widget_knob/knob.js"></script>
+
+    <style>
+        /* Style halaman minimal */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #1a202c;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 { margin-bottom: 20px; }
+        .info {
+            margin-top: 20px;
+            background: #2d3748;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .info code {
+            background: #4a5568;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>Contoh Dasar - Widget Knob</h2>
+    <p style="color: #a0aec0; margin-bottom: 10px;">Implementasi paling sederhana</p>
+
+    <!-- Container untuk widget knob (hanya perlu div ini) -->
+    <div id="my-gauge"></div>
+
+    <div class="info">
+        <p>Nilai saat ini: <strong id="current-value">0</strong></p>
+        <button id="btn-random" style="margin-top: 10px; padding: 8px 20px; background: #48bb78; color: white; border: none; border-radius: 5px; cursor: pointer;">Acak Nilai</button>
+    </div>
+
+    <script>
+        // =============================================
+        // SETUP WIDGET - Hanya perlu 3 langkah:
+        // 1. Buat container <div id="my-gauge"></div>
+        // 2. Copy knob.js & knob.css ke project
+        // 3. Instantiate class KnobGauge
+        // =============================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Buat instance widget
+            const gauge = new KnobGauge('my-gauge', {
+                minValue: 0,
+                maxValue: 100,
+                value: 50,
+                width: 300,
+                height: 300,
+                animationDuration: 800
+            });
+
+            // Update display nilai
+            document.getElementById('current-value').textContent = gauge.getValue();
+
+            // Contoh menggunakan method setValue()
+            document.getElementById('btn-random').addEventListener('click', () => {
+                const randomVal = Math.floor(Math.random() * 101);
+                gauge.setValue(randomVal);
+                document.getElementById('current-value').textContent = randomVal;
+            });
+
+            // Event listener 'change'
+            gauge.on('change', (data) => {
+                document.getElementById('current-value').textContent = Math.round(data.value);
+            });
+        });
+    </script>
+</body>
+</html>

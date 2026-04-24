@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Otomatis - Widget Knob</title>
+
+    <!-- [WAJIB] Library Canvas Gauges -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-gauges@2.1.7/gauge.min.js"></script>
+
+    <!-- [WAJIB] CSS Widget Knob -->
+    <link rel="stylesheet" href="../asset/widget_knob/knob.css">
+
+    <!-- [WAJIB] JS Widget Knob -->
+    <script src="../asset/widget_knob/knob.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #1a202c;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 { margin-bottom: 20px; }
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 450px;
+        }
+        .controls {
+            width: 100%;
+            background: #2d3748;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .controls label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .button-group button {
+            padding: 10px 25px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+        .button-group button:hover { filter: brightness(1.1); }
+        .button-group button:active { opacity: 0.8; }
+        .btn-start { background-color: #48bb78; }
+        .btn-stop { background-color: #f56565; }
+        .btn-reset { background-color: #a0aec0; color: #1a202c; }
+        .status {
+            margin-top: 15px;
+            color: #a0aec0;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .current-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #48bb78;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Contoh Otomatis - Simulasi Acak</h2>
+
+    <div class="demo-container">
+        <!-- Container widget knob -->
+        <div id="my-gauge"></div>
+
+        <div class="controls">
+            <label>Kontrol Simulasi</label>
+            <div class="button-group">
+                <button class="btn-start" id="btn-start">▶ Mulai Acak</button>
+                <button class="btn-stop" id="btn-stop">⏹ Berhenti</button>
+                <button class="btn-reset" id="btn-reset">↺ Reset</button>
+            </div>
+            <div class="status" id="status-info">Klik "Mulai Acak" untuk memulai simulasi</div>
+            <div class="current-value" id="display-val">0</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inisialisasi widget
+            const gauge = new KnobGauge('my-gauge', {
+                minValue: 0,
+                maxValue: 100,
+                value: 0,
+                animationDuration: 800
+            });
+
+            const displayVal = document.getElementById('display-val');
+            const statusInfo = document.getElementById('status-info');
+            let simulationInterval = null;
+
+            // Update display
+            function updateDisplay(value) {
+                displayVal.textContent = Math.round(value);
+            }
+
+            // Mulai simulasi
+            function startSimulation() {
+                stopSimulation();
+                statusInfo.textContent = '⏳ Simulasi berjalan...';
+                simulationInterval = setInterval(() => {
+                    const randomVal = Math.floor(Math.random() * 101);
+                    gauge.setValue(randomVal);
+                    // Display diupdate otomatis via event 'change'
+                }, 1500);
+            }
+
+            // Hentikan simulasi
+            function stopSimulation() {
+                if (simulationInterval) {
+                    clearInterval(simulationInterval);
+                    simulationInterval = null;
+                }
+                statusInfo.textContent = '⏸ Simulasi dihentikan';
+            }
+
+            // Reset
+            function resetGauge() {
+                stopSimulation();
+                gauge.setValue(0);
+                statusInfo.textContent = '↺ Reset ke 0';
+            }
+
+            // Event listener
+            document.getElementById('btn-start').addEventListener('click', startSimulation);
+            document.getElementById('btn-stop').addEventListener('click', stopSimulation);
+            document.getElementById('btn-reset').addEventListener('click', resetGauge);
+
+            // Event dari gauge -> update display
+            gauge.on('change', (data) => {
+                updateDisplay(data.value);
+            });
+
+            // Display awal
+            updateDisplay(gauge.getValue());
+        });
+    </script>
+</body>
+</html>

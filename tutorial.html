@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Widget Knob Gauge</title>
+    <link rel="stylesheet" href="asset/web/main.css">
+
+    <style>
+        /* ===== Styling khusus halaman tutorial ===== */
+        body {
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .tutorial-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .tutorial-container h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tutorial-container .subtitle {
+            color: #a0aec0;
+            margin-bottom: 30px;
+        }
+
+        .tutorial-container h2 {
+            color: #e2e8f0;
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2d3748;
+        }
+
+        .tutorial-container h3 {
+            color: #cbd5e0;
+            font-size: 1.15rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .tutorial-container p,
+        .tutorial-container li {
+            color: #cbd5e0;
+            line-height: 1.7;
+        }
+
+        .tutorial-container ul,
+        .tutorial-container ol {
+            padding-left: 20px;
+        }
+
+        .tutorial-container li {
+            margin-bottom: 8px;
+        }
+
+        .tutorial-container strong {
+            color: #f1f5f9;
+        }
+
+        /* ===== Code inline ===== */
+        .tutorial-container code {
+            background: #374151;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.88em;
+            color: #fbbf24;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        /* ===== Code block (pre) ===== */
+        .tutorial-container pre {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 18px 22px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .tutorial-container pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: #e2e8f0;
+            font-size: 0.92rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            white-space: pre;
+        }
+
+        /* ===== Note & Warning ===== */
+        .tutorial-container .note {
+            background: #1e293b;
+            border-left: 4px solid #3b82f6;
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin: 18px 0;
+            color: #cbd5e0;
+        }
+
+        .tutorial-container .note strong {
+            color: #60a5fa;
+        }
+
+        .tutorial-container .warning {
+            background: #1e293b;
+            border-left: 4px solid #fbbf24;
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin: 18px 0;
+            color: #cbd5e0;
+        }
+
+        .tutorial-container .warning strong {
+            color: #fbbf24;
+        }
+
+        /* ===== Table ===== */
+        .tutorial-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+        }
+
+        .tutorial-container th,
+        .tutorial-container td {
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid #334155;
+        }
+
+        .tutorial-container th {
+            background: #1e293b;
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .tutorial-container td {
+            color: #cbd5e0;
+        }
+
+        .tutorial-container td code {
+            font-size: 0.85rem;
+        }
+
+        /* ===== Back link ===== */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Step boxes ===== */
+        .step-box {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            color: #e2e8f0;
+        }
+        .step-box .step-num {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.85rem;
+            line-height: 24px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="index.html" class="back-link">&larr; Kembali ke Beranda</a>
+        <h1>📖 Tutorial Widget Knob Gauge</h1>
+        <p class="subtitle">Panduan lengkap cara menggunakan widget knob di project kamu.</p>
+
+        <!-- ==================== DAFTAR ISI ==================== -->
+        <h2>Daftar Isi</h2>
+        <ol>
+            <li><a href="#cara-copy" style="color: #60a5fa;">Cara Copy Widget ke Project Lain</a></li>
+            <li><a href="#setup-awal" style="color: #60a5fa;">Setup Awal</a></li>
+            <li><a href="#api-reference" style="color: #60a5fa;">API Reference</a></li>
+            <li><a href="#kustomisasi" style="color: #60a5fa;">Kustomisasi Tampilan</a></li>
+            <li><a href="#contoh-lengkap" style="color: #60a5fa;">Contoh Lengkap</a></li>
+        </ol>
+
+        <!-- ==================== CARA COPY ==================== -->
+        <h2 id="cara-copy">1️⃣ Cara Copy Widget ke Project Lain</h2>
+        <p>Untuk menggunakan widget ini di project lain, kamu hanya perlu <strong>2 file</strong>:</p>
+
+        <div class="step-box">
+            <span class="step-num">1</span>
+            <strong>Copy <code>knob.js</code></strong> ke project kamu
+        </div>
+        <div class="step-box">
+            <span class="step-num">2</span>
+            <strong>Copy <code>knob.css</code></strong> ke project kamu
+        </div>
+        <div class="step-box">
+            <span class="step-num">3</span>
+            <strong>Sertakan CDN Canvas Gauges</strong> di halaman HTML kamu
+        </div>
+        <div class="step-box">
+            <span class="step-num">4</span>
+            <strong>Buat container</strong> <code>&lt;div id="gauge-saya"&gt;&lt;/div&gt;</code>
+        </div>
+        <div class="step-box">
+            <span class="step-num">5</span>
+            <strong>Instantiate</strong> class <code>KnobGauge</code> di JavaScript
+        </div>
+
+        <div class="note">
+            <strong>💡 Info:</strong> Kedua file (<code>knob.js</code> dan <code>knob.css</code>)
+            sudah <em>self-contained</em> - tidak ada dependensi file lain dari project ini.
+        </div>
+
+        <!-- ==================== SETUP AWAL ==================== -->
+        <h2 id="setup-awal">2️⃣ Setup Awal</h2>
+
+        <h3>Langkah 1: Sertakan Library Canvas Gauges</h3>
+        <p>Widget ini membutuhkan library <strong>Canvas Gauges</strong> dari CDN. Tambahkan baris berikut di dalam tag <code>&lt;head&gt;</code>:</p>
+        <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/canvas-gauges@2.1.7/gauge.min.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h3>Langkah 2: Copy & Sertakan File Widget</h3>
+        <p>Copy <code>knob.js</code> dan <code>knob.css</code> ke folder project kamu, lalu sertakan di HTML:</p>
+        <pre><code>&lt;!-- CSS Widget --&gt;
+&lt;link rel="stylesheet" href="path/ke/knob.css"&gt;
+
+&lt;!-- JS Widget --&gt;
+&lt;script src="path/ke/knob.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h3>Langkah 3: Buat Container</h3>
+        <p>Buat elemen <code>&lt;div&gt;</code> sebagai tempat widget akan di-render:</p>
+        <pre><code>&lt;!-- Container untuk widget --&gt;
+&lt;div id="my-gauge"&gt;&lt;/div&gt;</code></pre>
+
+        <h3>Langkah 4: Inisialisasi Widget</h3>
+        <p>Instantiate class <code>KnobGauge</code> dengan ID container dan opsi yang diinginkan:</p>
+        <pre><code>&lt;script&gt;
+    document.addEventListener('DOMContentLoaded', () =&gt; {
+        const gauge = new KnobGauge('my-gauge', {
+            minValue: 0,
+            maxValue: 100,
+            value: 50,
+            width: 300,
+            height: 300
+        });
+
+        // Set nilai baru
+        gauge.setValue(75);
+
+        // Dapatkan nilai saat ini
+        const currentValue = gauge.getValue();
+        console.log(currentValue); // 75
+
+        // Event listener saat nilai berubah
+        gauge.on('change', (data) =&gt; {
+            console.log('Nilai berubah:', data.value);
+        });
+    });
+&lt;/script&gt;</code></pre>
+
+        <div class="warning">
+            <strong>⚠️ Penting:</strong> Pastikan Canvas Gauges sudah dimuat SEBELUM <code>knob.js</code>,
+            karena <code>KnobGauge</code> membutuhkan class <code>RadialGauge</code>.
+        </div>
+
+        <!-- ==================== API REFERENCE ==================== -->
+        <h2 id="api-reference">3️⃣ API Reference</h2>
+
+        <h3>Constructor: <code>new KnobGauge(container, options)</code></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Tipe</th>
+                    <th>Default</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>container</code></td>
+                    <td>string / HTMLElement</td>
+                    <td><em>wajib</em></td>
+                    <td>ID atau elemen DOM container</td>
+                </tr>
+                <tr>
+                    <td><code>options.minValue</code></td>
+                    <td>number</td>
+                    <td><code>0</code></td>
+                    <td>Nilai minimum gauge</td>
+                </tr>
+                <tr>
+                    <td><code>options.maxValue</code></td>
+                    <td>number</td>
+                    <td><code>100</code></td>
+                    <td>Nilai maksimum gauge</td>
+                </tr>
+                <tr>
+                    <td><code>options.value</code></td>
+                    <td>number</td>
+                    <td><code>0</code></td>
+                    <td>Nilai awal gauge</td>
+                </tr>
+                <tr>
+                    <td><code>options.width</code></td>
+                    <td>number</td>
+                    <td><code>300</code></td>
+                    <td>Lebar canvas gauge (px)</td>
+                </tr>
+                <tr>
+                    <td><code>options.height</code></td>
+                    <td>number</td>
+                    <td><code>300</code></td>
+                    <td>Tinggi canvas gauge (px)</td>
+                </tr>
+                <tr>
+                    <td><code>options.units</code></td>
+                    <td>string</td>
+                    <td><code>""</code></td>
+                    <td>Satuan (contoh: "%", "°C", "km/j")</td>
+                </tr>
+                <tr>
+                    <td><code>options.animationDuration</code></td>
+                    <td>number</td>
+                    <td><code>1000</code></td>
+                    <td>Durasi animasi dalam milidetik</td>
+                </tr>
+                <tr>
+                    <td><code>options.animationRule</code></td>
+                    <td>string</td>
+                    <td><code>"linear"</code></td>
+                    <td>Jenis animasi (linear, el, bounce, dll)</td>
+                </tr>
+                <tr>
+                    <td><code>options.highlights</code></td>
+                    <td>Array</td>
+                    <td><code>[...]</code></td>
+                    <td>Array warna segmen</td>
+                </tr>
+                <tr>
+                    <td><code>options.showValueDisplay</code></td>
+                    <td>boolean</td>
+                    <td><code>true</code></td>
+                    <td>Tampilkan nilai numerik di tengah</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Methods</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>setValue(value, silent?)</code></td>
+                    <td>Set nilai gauge. <code>silent=true</code> untuk suppress event 'change'</td>
+                </tr>
+                <tr>
+                    <td><code>getValue()</code></td>
+                    <td>Mengembalikan nilai gauge saat ini</td>
+                </tr>
+                <tr>
+                    <td><code>on(event, callback)</code></td>
+                    <td>Daftarkan event listener. Event: <code>'change'</code></td>
+                </tr>
+                <tr>
+                    <td><code>off(event, callback?)</code></td>
+                    <td>Hapus event listener</td>
+                </tr>
+                <tr>
+                    <td><code>draw()</code></td>
+                    <td>Render ulang gauge</td>
+                </tr>
+                <tr>
+                    <td><code>destroy()</code></td>
+                    <td>Bersihkan instance dan hapus dari DOM</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ==================== KUSTOMISASI ==================== -->
+        <h2 id="kustomisasi">4️⃣ Kustomisasi Tampilan</h2>
+
+        <h3>Warna Highlight</h3>
+        <p>Atur warna segmen gauge dengan opsi <code>highlights</code>:</p>
+        <pre><code>const gauge = new KnobGauge('my-gauge', {
+    highlights: [
+        { from: 0, to: 40, color: "#22c55e" },   // Hijau
+        { from: 40, to: 70, color: "#eab308" },  // Kuning
+        { from: 70, to: 100, color: "#ef4444" }  // Merah
+    ]
+});</code></pre>
+
+        <h3>Variasi Ukuran via CSS</h3>
+        <p>Widget mendukung variasi ukuran melalui class CSS pada container:</p>
+        <pre><code>&lt;!-- Ukuran kecil --&gt;
+&lt;div id="my-gauge" class="knob-small"&gt;&lt;/div&gt;
+
+&lt;!-- Ukuran besar --&gt;
+&lt;div id="my-gauge" class="knob-large"&gt;&lt;/div&gt;
+
+&lt;!-- Tema terang --&gt;
+&lt;div id="my-gauge" class="knob-light"&gt;&lt;/div&gt;</code></pre>
+
+        <h3>Opsi Tambahan Warna</h3>
+        <p>Kustomisasi warna lebih detail:</p>
+        <pre><code>const gauge = new KnobGauge('my-gauge', {
+    colorPlate: "#1e293b",        // Warna latar gauge
+    colorMajorTicks: "#94a3b8",  // Warna tick utama
+    colorMinorTicks: "#475569",  // Warna tick minor
+    colorNumbers: "#f1f5f9",     // Warna angka
+    colorNeedle: "#f97316",      // Warna jarum
+    colorNeedleEnd: "#ea580c",   // Warna ujung jarum
+    needleType: "arrow",         // Tipe jarum: arrow, line
+    needleWidth: 4               // Lebar jarum
+});</code></pre>
+
+        <!-- ==================== CONTOH LENGKAP ==================== -->
+        <h2 id="contoh-lengkap">5️⃣ Contoh Lengkap</h2>
+        <p>Berikut contoh HTML lengkap dari awal sampai akhir untuk implementasi widget:</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Project Saya - Widget Knob&lt;/title&gt;
+
+    &lt;!-- 1. Canvas Gauges CDN --&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/canvas-gauges@2.1.7/gauge.min.js"&gt;&lt;/script&gt;
+
+    &lt;!-- 2. Widget Knob (copy dari project) --&gt;
+    &lt;link rel="stylesheet" href="asset/widget_knob/knob.css"&gt;
+    &lt;script src="asset/widget_knob/knob.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 3. Container --&gt;
+    &lt;div id="suhu-gauge"&gt;&lt;/div&gt;
+    &lt;p&gt;Suhu: &lt;span id="suhu-value"&gt;25&lt;/span&gt;&deg;C&lt;/p&gt;
+
+    &lt;script&gt;
+        document.addEventListener('DOMContentLoaded', () =&gt; {
+            // 4. Buat instance
+            const gauge = new KnobGauge('suhu-gauge', {
+                minValue: 0,
+                maxValue: 50,
+                value: 25,
+                width: 250,
+                height: 250,
+                units: '&deg;C',
+                animationDuration: 500,
+                highlights: [
+                    { from: 0, to: 20, color: '#3b82f6' },
+                    { from: 20, to: 35, color: '#22c55e' },
+                    { from: 35, to: 50, color: '#ef4444' }
+                ]
+            });
+
+            // 5. Gunakan method
+            gauge.setValue(32);
+
+            gauge.on('change', (data) =&gt; {
+                document.getElementById('suhu-value')
+                    .textContent = Math.round(data.value);
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <div class="note">
+            <strong>💡 Tips:</strong> Lihat folder <code>example/</code> untuk contoh-contoh lain yang lebih spesifik:
+            <ul style="margin-top: 8px;">
+                <li><a href="example/contoh_dasar.html" style="color: #60a5fa;">contoh_dasar.html</a> - Implementasi paling sederhana</li>
+                <li><a href="example/contoh_manual.html" style="color: #60a5fa;">contoh_manual.html</a> - Dengan slider kendali manual</li>
+                <li><a href="example/contoh_otomatis.html" style="color: #60a5fa;">contoh_otomatis.html</a> - Dengan simulasi otomatis</li>
+            </ul>
+        </div>
+
+        <hr style="border: 1px solid #334155; margin: 40px 0;">
+        <p style="text-align: center; color: #64748b;">Widget Knob Gauge v2 &copy; 2026</p>
+    </div>
+</body>
+</html>
